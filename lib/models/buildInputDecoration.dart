@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:learning_application/widgets/constants.dart';
 InputDecoration buildInputDecoration(IconData icons,String hinttext) {
   return InputDecoration(
     hintText: hinttext,
-    prefixIcon: Icon(icons),
+    labelText: hinttext,
+    prefixIcon: Icon(icons,),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide:const  BorderSide(
-          color:Color(0xFF9100BA),
+          color:Kcolor,
           width: 1
       ),
     ),

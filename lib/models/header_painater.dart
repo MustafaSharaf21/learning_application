@@ -37,7 +37,7 @@ class _FullHeaderPainterState extends State<FullHeaderPainter> {
             ),
           ),
           Positioned(
-            bottom: -120,
+            bottom: -110,
             child: Row(
               children: [
                 Container(
@@ -47,7 +47,7 @@ class _FullHeaderPainterState extends State<FullHeaderPainter> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(1000)),
                   child: Image.asset(
-                    'assets/images/login_image.jpg',
+                    'assets/images/login_img.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -66,9 +66,9 @@ class HeaderPainter extends CustomPainter {
     Paint paint = Paint()..color =  Kcolor;
     Path path = Path();
     path.moveTo(0, 0);
-    path.lineTo(0, size.height);
+    path.lineTo(0, size.height-20);
     path.quadraticBezierTo(
-        size.width / 5, size.height + 130, size.width, size.height);
+        size.width /6, size.height + 140, size.width, size.height-30);
     path.lineTo(size.width, 0);
     path.close();
     return canvas.drawPath(path, paint);

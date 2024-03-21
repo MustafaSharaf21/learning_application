@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../models/country_search.dart';
 import '../models/header_painater.dart';
 import 'package:learning_application/models/buildInputDecoration.dart';
-
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../widgets/constants.dart';
+import 'home_page.dart';
 import 'login_page.dart';
+
 
 class RegisterPage2 extends StatefulWidget {
   static String id = " RegisterPage2";
@@ -12,29 +15,38 @@ class RegisterPage2 extends StatefulWidget {
 }
 
 class _RegisterPage2State extends State<RegisterPage2> {
-  TextEditingController _dateController =TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController country = TextEditingController();
   DateTime date=DateTime.now();
-  bool secureText = true;
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  List<String>genderList=['male','female'];
+
   String? selectedGender;
+  List<String>genderList=['male','female'];
 
-  @override
+  List<String>ListCountry=['Afghanistan',' Albania', ' Algeria',' Andorra',' Angola','Antigua and Barbuda',' Argentina',
+    'Armenia''Australia','Austria','Austrian Empire*',' Azerbaijan','Baden',' Bahamas', 'Bahrain','Bangladesh',' Barbados'
+    ,'Bavaria',' Belarus','Belgium','Belize','Benin (Dahomey)', 'Bolivia','Bosnia and Herzegovina','Botswana',' Brazil','Brunei'
+    ,' Brunswick and Lüneburg',' Bulgaria','Burkina Faso (Upper Volta)','Burma','Burundi', 'CabonVerde',' Cambodia',' Cameroon'
+    ,' Canada',' Cayman Islands','Central African Republic',' Central American Federation*',' Chad',' Chile', 'China',' Colombia',
+    'Comoros',' Congo Free State, The*','Costa Rica', 'Cote d’Ivoire ',' Croatia','Cuba','Cyprus','Czechia','Czechoslovakia'
+    ];
+  List<String>ListItemsEmpty=[];
+  FocusNode focusNode = FocusNode();
+  final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
+
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       body:Container(
         decoration:const  BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.white,
-              Color(0xFFE0B5EA),],
+              colors: [
+                Colors.white,
+                Color(0xFFB2CCC8),],
               begin: Alignment.topRight,
               end: Alignment.bottomLeft
-            ),
-           ),
+          ),
+        ),
           child: ListView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             children:[ Form(
               key: _formkey,
               child: Column(
@@ -43,33 +55,50 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   FullHeaderPainter(HeaderText:"Register"),
                   const  SizedBox(height: 150,),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10,left:30,right:30),
-                    child: TextFormField(
+                    padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30),
+                    child: IntlPhoneField(
+                      controller:phone ,
+                      autofocus: true,
+                      initialCountryCode: 'SY',
                       keyboardType: TextInputType.phone,
-                      decoration:buildInputDecoration(Icons.phone,"Phone Number"),
-                      validator: ( value){
-                        if(value!.isEmpty)
-                        {
-                          return 'Enter a Phone Number';
-                        }
-                        return null;
+                      onChanged: (value){
+                        value.completeNumber;
                       },
+                      decoration:buildInputDecoration(Icons.phone,"Phone Number"),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 40,left:30,right:30),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration:buildInputDecoration(Icons.home,"Address"),
-                      validator: ( value){
-                        if(value!.isEmpty)
-                        {
-                          return 'Enter an address';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+                        padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30),
+                        child: TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: country,
+                            decoration: buildInputDecoration(Icons.location_city, "Country"),
+                            onChanged: (value){
+                              ListCountry.forEach((element) {
+                                var name=element.toLowerCase();
+                                if(name.contains(value)) {
+                                  setState(() {
+                                    ListItemsEmpty.add(element);
+                                  });
+                                  if (value.isEmpty) {
+                                    setState(() {
+                                      ListItemsEmpty.clear();
+                                    });
+                                  }
+                                }
+                              });
+                            },
+                            onTap: (){
+                              showSearch(context: context, delegate:CountrySearch());
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Enter a Country';
+                              }
+                              return null;
+                            }
+                        ),
+                      ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10,right: 30,left: 30),
                     child:Row(
@@ -90,7 +119,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                                          ),
                                        ),
                                 style:ElevatedButton.styleFrom(
-                                  primary: Kcolor,
+                                  backgroundColor: Kcolor,
                                   minimumSize:const Size(50,50),
                               ),
                             ),
@@ -113,12 +142,13 @@ class _RegisterPage2State extends State<RegisterPage2> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child:Padding(
-                                      padding:const  EdgeInsets.only(left: 10,right:10,bottom:5),
+                                      padding:const  EdgeInsets.only(left: 20,right:20,bottom:5),
                                       child:Row(
                                         children: [
                                           const Icon(Icons.six_ft_apart_outlined,color:Color(0xFF565555),),
                                           const SizedBox(width: 10,),
                                           DropdownButton(
+                                            borderRadius: BorderRadius.circular(30),
                                             underline:const Divider(color: Kcolor,),
                                             icon:const Icon(Icons.arrow_drop_down,color: Colors.white,),
                                             dropdownColor: Kcolor,
@@ -143,6 +173,7 @@ class _RegisterPage2State extends State<RegisterPage2> {
                                               });
                                             },
                                             value: selectedGender,
+
                                           ),
                                         ],
                                       ),
@@ -159,18 +190,17 @@ class _RegisterPage2State extends State<RegisterPage2> {
                   GestureDetector(
                       onTap: (){
                         if (_formkey.currentState!.validate()){
-                          return;
-                        }else{
-                          print("object");
+                          Navigator.push(context,MaterialPageRoute(builder: (context){
+                            return HomePage();
+                          }));
                         }
-
                       },
                       child:Padding(padding:const EdgeInsets.symmetric(vertical:0.0 ,horizontal:80.0 ) ,
                         child:Container(
                           height: 40,
                           width: 150,
                           decoration: const BoxDecoration(
-                              color: Color(0xFF9100BA),
+                              color: Kcolor,
                               borderRadius: BorderRadius.all(Radius.circular(30),)
                           ),
                           child:const Center(child: Text("Register",
@@ -201,14 +231,12 @@ class _RegisterPage2State extends State<RegisterPage2> {
                          ),
                       ),
                   const  SizedBox(height: 30,),
+                  ])
+                ),
                 ],
               ),
-            ),
-        ],
-          ),
-
-      )
-    );
+      ),
+     );
   }
   Future<void>_selectDate()async{
     DateTime? _picked=await showDatePicker(
@@ -220,18 +248,33 @@ class _RegisterPage2State extends State<RegisterPage2> {
     if(_picked!=null)
     {setState((){
       date=_picked;
-      /*_dateController.text=_picked.toString();*/
+
 
     });}
   }
-/*String formattedDate(_dateController){
-    var formDate=DateTime.fromMicrosecondsSinceEpoch( _dateController.seconde*1000);
-    return DateFormat('dd-MM-yyyy').format(formDate);
-  }*/
 }
 
 
 
+/* Visibility(
+                        visible: focusNode.hasFocus,
+                        child:Expanded(
+                          child: ListView.builder(
+                              itemCount:ListItemsEmpty.isNotEmpty?ListItemsEmpty.length:ListCountry.length,
+                              itemBuilder:(context,index){
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30),
+                                  child: Text(
+                                    ListItemsEmpty.isNotEmpty?ListCountry[index]:ListCountry[index],
+                                    style:const  TextStyle(fontSize: 20),
+
+                                  ),
+                                );
+                              }
+                          ),
+
+                        ),
+                      ),*/
 
 
 
