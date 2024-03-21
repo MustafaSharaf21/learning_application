@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>{
   bool secureText = true;
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
