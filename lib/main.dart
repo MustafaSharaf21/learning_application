@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learning_application/screens/login_page.dart';
-import 'package:learning_application/screens/login_screen.dart';
-
+import 'package:learning_application/screens/register_page.dart';
+import 'package:learning_application/screens/register_page_2.dart';
+import 'package:learning_application/widgets/constants.dart';
 
 
 void main() {
@@ -17,19 +18,19 @@ class LearningApplication extends StatefulWidget {
 class _LearningApplicationState extends State<LearningApplication> {
   @override
   Widget build(BuildContext context) {
-    return MediaQuery(
-        data:MediaQueryData.fromView(WidgetsBinding.instance.window),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-    routes: {
-           /* RegisterPage.id: (context) => RegisterPage(),*/
-            /* LoginPage.id: (context) => LoginPage(),*/
-            FormPage.id:(context)=>FormPage(),
-    },
-          initialRoute:  FormPage.id,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch:Colors.purple),
+        routes: {
+         RegisterPage.id: (context) => RegisterPage(),
+         RegisterPage2.id: (context) => RegisterPage2(),
+         LoginPage.id: (context) => LoginPage(),
+
+        },
+      initialRoute:  LoginPage.id,
 
 
-        ),);
+    );
   }
 }
 

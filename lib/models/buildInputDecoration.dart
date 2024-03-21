@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 InputDecoration buildInputDecoration(IconData icons,String hinttext) {
   return InputDecoration(
     hintText: hinttext,
@@ -14,21 +13,19 @@ InputDecoration buildInputDecoration(IconData icons,String hinttext) {
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide:const  BorderSide(
-        color: Colors.blue,
+        color: Colors.grey,
         width: 1,
-
       ),
     ),
     enabledBorder:OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide:const BorderSide(
-        color: Colors.blue,
+        color: Colors.grey,
         width: 1,
       ),
     ),
   );
 }
-
 
 
 
