@@ -64,7 +64,6 @@ class _AnimatedTextFieldState extends State<AnimatedTextField>with SingleTickerP
                  Transform.scale(
                   scaleX: _scaleAnimation.value,
                   child: Container(
-
                     decoration: BoxDecoration(
                       color: widget.primaryColor,
                       borderRadius: BorderRadius.circular(30),
