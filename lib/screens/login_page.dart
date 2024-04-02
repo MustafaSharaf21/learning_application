@@ -12,12 +12,11 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>with SingleTickerProviderStateMixin{
+class _LoginPageState extends State<LoginPage>{
   bool secureText = true;
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
