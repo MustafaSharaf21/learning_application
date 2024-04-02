@@ -12,6 +12,7 @@ class FullHeaderPainter extends StatefulWidget {
 }
 
 class _FullHeaderPainterState extends State<FullHeaderPainter> {
+ /* FirebaseService _service= FirebaseService();*/
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

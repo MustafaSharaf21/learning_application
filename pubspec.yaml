@@ -49,8 +49,11 @@ dependencies:
   get: ^4.6.6
   dots_indicator: ^3.0.0
   curved_navigation_bar: ^1.0.3
-  lottie: ^3.1.0 #for anmation
-  animated_text_kit: ^4.2.2
+  lottie: ^3.1.0 #tfor animation
+  animated_text_kit: ^4.2.2 #To move texts
+  image_picker: ^1.0.7 #To add an image by the user
+  firebase_storage: ^11.7.0
+
 
 
 

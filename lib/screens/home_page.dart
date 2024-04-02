@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_application/widgets/constants.dart';
 class HomePage extends StatefulWidget {
@@ -78,16 +79,16 @@ class _HomeState extends State<HomePage> {
                           )
                        ],
                     ),
-      /*bottomNavigationBar: CurvedNavigationBar(
-              color: Color(0xFFC68FCE),
-              backgroundColor: Colors.white,
-             items: [
-               Icon(Icons.home,size: 30,color:Colors.white),
-               Icon(Icons.favorite,size: 30,color:Colors.white),
-               Icon(Icons.local_library_outlined,size: 30,color:Colors.white),
-              Icon(Icons.search,size: 30,color:Colors.white)
-                ],
-      ),*/
+                bottomNavigationBar: CurvedNavigationBar(
+                                          color: Color(0xFFC68FCE),
+                                          backgroundColor: Colors.white,
+                                          items:const [
+                                        Icon(Icons.home,size: 30,color:Colors.white),
+                                        Icon(Icons.favorite,size: 30,color:Colors.white),
+                                        Icon(Icons.local_library_outlined,size: 30,color:Colors.white),
+                                        Icon(Icons.search,size: 30,color:Colors.white)
+                                                      ],
+      ),
     );
   }
 }
