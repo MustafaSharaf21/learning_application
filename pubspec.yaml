@@ -53,6 +53,10 @@ dependencies:
   animated_text_kit: ^4.2.2 #To move texts
   image_picker: ^1.0.7 #To add an image by the user
   firebase_storage: ^11.7.0
+  google_sign_in: ^6.2.0
+  firebase_auth: ^4.19.0
+  firebase_core: ^2.28.0
+
 
 
 

@@ -24,7 +24,6 @@ class _SplashPageState extends State<SplashPage> {
             context,  LoginPage.id));
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
       body:Container(
@@ -42,19 +41,19 @@ class _SplashPageState extends State<SplashPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                     Padding(
-                      padding:const EdgeInsets.only(left: 140,right: 140,bottom: 10) ,
+                      padding:const EdgeInsets.only(left: 140,right: 140,bottom:20) ,
                       child: ClipRRect(
-                               borderRadius: BorderRadius.circular(30),
-                               child: Image.asset('assets/images/logo_img.png',
-                            ),
-                         ),
+                                     borderRadius: BorderRadius.circular(30),
+                                     child: Image.asset('assets/images/logo_img.png',
+                                           ),
+                                         ),
                                      ),
                     DefaultTextStyle(
                         style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Kcolor
-                                             ),
+                                       fontSize: 20,
+                                       fontWeight: FontWeight.bold,
+                                       color: Kcolor
+                                              ),
                               child: AnimatedTextKit(
                               pause:const  Duration(seconds:4),
                               animatedTexts: [
@@ -63,11 +62,11 @@ class _SplashPageState extends State<SplashPage> {
                                           isRepeatingAnimation: true,
                                             ),
                                           ),
-                            ],
+                           ],
                          ),
                      ),
-                ),
-           );
+                    ),
+                 );
       }
 }
 

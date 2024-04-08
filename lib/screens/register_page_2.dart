@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/country_search.dart';
 import '../models/header_painater.dart';
 import 'package:learning_application/models/buildInputDecoration.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -18,20 +17,22 @@ class _RegisterPage2State extends State<RegisterPage2> {
   TextEditingController phone = TextEditingController();
   TextEditingController country = TextEditingController();
   DateTime date=DateTime.now();
-
   String? selectedGender;
   List<String>genderList=['male','female'];
-
-  List<String>ListCountry=['Afghanistan',' Albania', ' Algeria',' Andorra',' Angola','Antigua and Barbuda',' Argentina',
+  String? selectedCountry;
+  List<String>CountryList=['Afghanistan',' Albania', ' Algeria',' Andorra',' Angola','Antigua and Barbuda',' Argentina',
     'Armenia''Australia','Austria','Austrian Empire*',' Azerbaijan','Baden',' Bahamas', 'Bahrain','Bangladesh',' Barbados'
     ,'Bavaria',' Belarus','Belgium','Belize','Benin (Dahomey)', 'Bolivia','Bosnia and Herzegovina','Botswana',' Brazil','Brunei'
     ,' Brunswick and Lüneburg',' Bulgaria','Burkina Faso (Upper Volta)','Burma','Burundi', 'CabonVerde',' Cambodia',' Cameroon'
     ,' Canada',' Cayman Islands','Central African Republic',' Central American Federation*',' Chad',' Chile', 'China',' Colombia',
     'Comoros',' Congo Free State, The*','Costa Rica', 'Cote d’Ivoire ',' Croatia','Cuba','Cyprus','Czechia','Czechoslovakia'
     ];
-  List<String>ListItemsEmpty=[];
-  FocusNode focusNode = FocusNode();
+  String? selectedSpecialization;
+  List<String>SpecializationList=['Ui','Ux','Frontend Developer','Backend Developer'];
+
   final GlobalKey<FormState>_formkey = GlobalKey<FormState>();
+
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,38 +68,56 @@ class _RegisterPage2State extends State<RegisterPage2> {
                       decoration:buildInputDecoration(Icons.phone,"Phone Number"),
                     ),
                   ),
-                  Padding(
-                        padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30),
-                        child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            controller: country,
-                            decoration: buildInputDecoration(Icons.location_city, "Country"),
-                            onChanged: (value){
-                              ListCountry.forEach((element) {
-                                var name=element.toLowerCase();
-                                if(name.contains(value)) {
-                                  setState(() {
-                                    ListItemsEmpty.add(element);
-                                  });
-                                  if (value.isEmpty) {
-                                    setState(() {
-                                      ListItemsEmpty.clear();
-                                    });
-                                  }
-                                }
+                  Container(
+                    width: 325,
+                    height: 65,
+                    decoration:BoxDecoration(
+                      border: Border.all(color: Colors.grey,width: 1),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child:Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left:10,top: 5),
+                          child:Icon(Icons.location_city,color: Color(0xFF413F3F)) ,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:16,right: 20,top: 5),
+                          child:DropdownButton(
+                            borderRadius: BorderRadius.circular(30),
+                            underline:const Divider( thickness:0,height:0),
+                            icon:const Icon(Icons.arrow_drop_down, color: Color(0xFF464241),size: 30,),
+                            dropdownColor: Kcolor,
+                            hint:const  Text(
+                              'Country                                            ',
+                              style: TextStyle(
+                                  fontSize:15,
+                                  color: Color(0xFF464241),
+                                  fontFamily:'Cairo'),
+                            ),
+                            items:CountryList.map((item) =>DropdownMenuItem(
+                              value: item,
+                              child: Text(item,
+                                style:const  TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontFamily:'Cairo'),
+                              ),
+                            ),
+                            ).toList(),
+                            onChanged: (item){
+                              setState((){
+                                selectedCountry=item;
+                                // print( selectedGender);
                               });
                             },
-                            onTap: (){
-                              showSearch(context: context, delegate:CountrySearch());
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Enter a Country';
-                              }
-                              return null;
-                            }
-                        ),
-                      ),
+                            value: selectedCountry,
+
+                          ) ,),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20,),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10,right: 30,left: 30),
                     child:Row(
@@ -256,25 +275,3 @@ class _RegisterPage2State extends State<RegisterPage2> {
 
 
 
-/* Visibility(
-                        visible: focusNode.hasFocus,
-                        child:Expanded(
-                          child: ListView.builder(
-                              itemCount:ListItemsEmpty.isNotEmpty?ListItemsEmpty.length:ListCountry.length,
-                              itemBuilder:(context,index){
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30),
-                                  child: Text(
-                                    ListItemsEmpty.isNotEmpty?ListCountry[index]:ListCountry[index],
-                                    style:const  TextStyle(fontSize: 20),
-
-                                  ),
-                                );
-                              }
-                          ),
-
-                        ),
-                      ),*/
-
-
-/*itgoighirthgiihifgsf*/

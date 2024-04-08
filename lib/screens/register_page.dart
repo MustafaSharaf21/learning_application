@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_application/screens/register_page_2.dart';
 import 'package:lottie/lottie.dart';
@@ -23,6 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController confirmpassword = TextEditingController();
   bool secureText = true,secureText2 = true;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  List<String>genderList=['Teacher','Student'];
+  String? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -38,26 +41,77 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
         child:ListView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           children: [Form(
           key: _formkey,
           child: Column(
             children:[
               FullHeaderPainter(HeaderText: "Register"),
               const SizedBox(height: 200,),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30,),
-                child: TextFormField(
-                  controller: Student_or_teacher,
-                  keyboardType: TextInputType.text,
-                  decoration: buildInputDecoration(Icons.person, "Student or teacher"),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter a Student or teacher';
-                    }
-                    return null;
-                  },
+              DefaultTextStyle(
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold,
+                    color: Kcolor
+                                     ),
+                child: AnimatedTextKit(
+                animatedTexts: [
+                   TypewriterAnimatedText("Do you want to Register as Teacher or Student ?"),
+                               ],
+                                  ),
+                             ),
+              Container(
+                  width: 325,
+                  height: 65,
+                  decoration:BoxDecoration(
+                  border: Border.all(color: Colors.grey,width: 1),
+                  borderRadius: BorderRadius.circular(30),
+                       ),
+                child:Row(
+                  children: [
+                   const Padding(
+                          padding: EdgeInsets.only(left:10,top: 5),
+                          child:Icon(Icons.person,color: Color(0xFF413F3F)) ,
+                              ),
+                    Padding(
+                      padding: const EdgeInsets.only(left:16,right: 20,top: 5),
+                      child:DropdownButton(
+                        borderRadius: BorderRadius.circular(30),
+                        underline:const Divider( thickness:0,height:0),
+                        icon:const Icon(Icons.arrow_drop_down, color: Color(0xFF464241),size: 30,),
+                        dropdownColor: Kcolor,
+                        hint:const  Text(
+                          'Choose Teacher or Student              ',
+                           style: TextStyle(
+                              fontSize:15,
+                              color: Color(0xFF464241),
+                              fontFamily:'Cairo'),
+                        ),
+                        items:genderList.map((item) =>DropdownMenuItem(
+                          value: item,
+                          child: Text(item,
+                            style:const  TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontFamily:'Cairo'),
+                          ),
+                        ),
+                        ).toList(),
+                        onChanged: (item){
+                          setState((){
+                            selectedGender=item;
+                           // print( selectedGender);
+                          });
+                        },
+                        value: selectedGender,
+
+                      ) ,),
+                  ],
                 ),
+
               ),
+              const  SizedBox(height: 15,),
               Padding(
                 padding: const EdgeInsets.only(bottom: 15, left: 30, right: 30,),
                 child: TextFormField(
